@@ -5327,6 +5327,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5344,6 +5345,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     sayHi: function sayHi() {
       console.log('Hi');
+    }
+  },
+  computed: {
+    jobs: function jobs() {
+      return this.name + " Программист!";
     }
   },
   components: {
@@ -28252,7 +28258,9 @@ var render = function () {
       "div",
       { staticClass: "alert alert-info my-3" },
       [
-        _vm._v("\n        Mi first component!\n        "),
+        _vm._v("\n        Mi first component!"),
+        _c("br"),
+        _vm._v("\n        " + _vm._s(_vm.jobs) + "\n        "),
         _c("div", { staticClass: "my-3" }, [
           _c(
             "button",
@@ -28262,7 +28270,10 @@ var render = function () {
           _vm._v(" "),
           _c(
             "button",
-            { staticClass: "btn btn-warning", on: { click: _vm.sayHi } },
+            {
+              staticClass: "btn btn-warning",
+              on: { click: function ($event) {} },
+            },
             [_vm._v("Hi")]
           ),
         ]),
