@@ -1,13 +1,26 @@
 <template>
     <div class="container">
         <div class="alert alert-info my-3">
-            Mi first component!<br>
-            {{jobs}}
-            <div class="my-3">
-                <button class="btn btn-danger" @click="sayHello">Hello</button>
-                <button class="btn btn-warning" @click="">Hi</button>
-            </div>
             <SinglePostComponent></SinglePostComponent>
+
+            <table class="table">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Job</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="person in getPersons">
+                    <th scope="row">{{person.id}}</th>
+                    <td>{{person.name}}</td>
+                    <td>{{person.age}}</td>
+                    <td>@{{person.job}}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
@@ -20,29 +33,50 @@ export default {
 
     data() {
         return {
-            name: 'Vasia',
-            age: 25,
-            skills: [
-                'html',
-                'css',
-                'js',
-                'php'
+            persons: [
+                {
+                    id: 1,
+                    name: 'Vasya',
+                    age: 20,
+                    job: 'Coach'
+                },
+                {
+                    id: 2,
+                    name: 'Anya',
+                    age: 17,
+                    job: 'Schoolgirl'
+                },
+                {
+                    id: 3,
+                    name: 'Petr',
+                    age: 30,
+                    job: 'Teacher'
+                },
+                {
+                    id: 4,
+                    name: 'Tanya',
+                    age: 25,
+                    job: 'Traveler'
+                },
+                {
+                    id: 5,
+                    name: 'Irina',
+                    age: 27,
+                    job: 'Designer'
+                },
             ]
         }
     },
 
     methods: {
-        sayHello(){
-            console.log('Hello');
-        },
-        sayHi(){
-            console.log('Hi');
-        }
+
     },
 
     computed: {
-        jobs(){
-            return this.name + " Программист!"
+        getPersons(){
+            return this.persons.filter((person) => {
+                return person.age > 20
+            })
         }
     },
 

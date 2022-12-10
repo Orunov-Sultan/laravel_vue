@@ -5328,28 +5328,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostComponent",
   data: function data() {
     return {
-      name: 'Vasia',
-      age: 25,
-      skills: ['html', 'css', 'js', 'php']
+      persons: [{
+        id: 1,
+        name: 'Vasya',
+        age: 20,
+        job: 'Coach'
+      }, {
+        id: 2,
+        name: 'Anya',
+        age: 17,
+        job: 'Schoolgirl'
+      }, {
+        id: 3,
+        name: 'Petr',
+        age: 30,
+        job: 'Teacher'
+      }, {
+        id: 4,
+        name: 'Tanya',
+        age: 25,
+        job: 'Traveler'
+      }, {
+        id: 5,
+        name: 'Irina',
+        age: 27,
+        job: 'Designer'
+      }]
     };
   },
-  methods: {
-    sayHello: function sayHello() {
-      console.log('Hello');
-    },
-    sayHi: function sayHi() {
-      console.log('Hi');
-    }
-  },
+  methods: {},
   computed: {
-    jobs: function jobs() {
-      return this.name + " Программист!";
+    getPersons: function getPersons() {
+      return this.persons.filter(function (person) {
+        return person.age > 20;
+      });
     }
   },
   components: {
@@ -28258,33 +28289,52 @@ var render = function () {
       "div",
       { staticClass: "alert alert-info my-3" },
       [
-        _vm._v("\n        Mi first component!"),
-        _c("br"),
-        _vm._v("\n        " + _vm._s(_vm.jobs) + "\n        "),
-        _c("div", { staticClass: "my-3" }, [
-          _c(
-            "button",
-            { staticClass: "btn btn-danger", on: { click: _vm.sayHello } },
-            [_vm._v("Hello")]
-          ),
+        _c("SinglePostComponent"),
+        _vm._v(" "),
+        _c("table", { staticClass: "table" }, [
+          _vm._m(0),
           _vm._v(" "),
           _c(
-            "button",
-            {
-              staticClass: "btn btn-warning",
-              on: { click: function ($event) {} },
-            },
-            [_vm._v("Hi")]
+            "tbody",
+            _vm._l(_vm.getPersons, function (person) {
+              return _c("tr", [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _vm._v(_vm._s(person.id)),
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(person.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(person.age))]),
+                _vm._v(" "),
+                _c("td", [_vm._v("@" + _vm._s(person.job))]),
+              ])
+            }),
+            0
           ),
         ]),
-        _vm._v(" "),
-        _c("SinglePostComponent"),
       ],
       1
     ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "table-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Age")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Job")]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
