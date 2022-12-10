@@ -5323,6 +5323,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5333,6 +5337,14 @@ __webpack_require__.r(__webpack_exports__);
       age: 25,
       skills: ['html', 'css', 'js', 'php']
     };
+  },
+  methods: {
+    sayHello: function sayHello() {
+      console.log('Hello');
+    },
+    sayHi: function sayHi() {
+      console.log('Hi');
+    }
   },
   components: {
     SinglePostComponent: _SinglePostComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -28241,6 +28253,20 @@ var render = function () {
       { staticClass: "alert alert-info my-3" },
       [
         _vm._v("\n        Mi first component!\n        "),
+        _c("div", { staticClass: "my-3" }, [
+          _c(
+            "button",
+            { staticClass: "btn btn-danger", on: { click: _vm.sayHello } },
+            [_vm._v("Hello")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-warning", on: { click: _vm.sayHi } },
+            [_vm._v("Hi")]
+          ),
+        ]),
+        _vm._v(" "),
         _c("SinglePostComponent"),
       ],
       1

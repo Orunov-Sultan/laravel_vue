@@ -2,6 +2,10 @@
     <div class="container">
         <div class="alert alert-info my-3">
             Mi first component!
+            <div class="my-3">
+                <button class="btn btn-danger" @click="sayHello">Hello</button>
+                <button class="btn btn-warning" @click="sayHi">Hi</button>
+            </div>
             <SinglePostComponent></SinglePostComponent>
         </div>
     </div>
@@ -23,6 +27,15 @@ export default {
                 'js',
                 'php'
             ]
+        }
+    },
+
+    methods: {
+        sayHello(){
+            console.log('Hello');
+        },
+        sayHi(){
+            console.log('Hi');
         }
     },
 
