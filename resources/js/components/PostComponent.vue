@@ -13,11 +13,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="person in getPersons">
+                <tr v-for="person in persons">
                     <th scope="row">{{person.id}}</th>
                     <td>{{person.name}}</td>
                     <td>{{person.age}}</td>
-                    <td>@{{person.job}}</td>
+                    <td>{{person.job}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -33,51 +33,25 @@ export default {
 
     data() {
         return {
-            persons: [
-                {
-                    id: 1,
-                    name: 'Vasya',
-                    age: 20,
-                    job: 'Coach'
-                },
-                {
-                    id: 2,
-                    name: 'Anya',
-                    age: 17,
-                    job: 'Schoolgirl'
-                },
-                {
-                    id: 3,
-                    name: 'Petr',
-                    age: 30,
-                    job: 'Teacher'
-                },
-                {
-                    id: 4,
-                    name: 'Tanya',
-                    age: 25,
-                    job: 'Traveler'
-                },
-                {
-                    id: 5,
-                    name: 'Irina',
-                    age: 27,
-                    job: 'Designer'
-                },
-            ]
+            persons: null
         }
+    },
+
+    mounted() {
+        this.getPosts()
     },
 
     methods: {
-
+        getPosts(){
+            axios.get('/posts')
+            .then(result => {
+                this.persons = result.data
+            })
+        }
     },
 
     computed: {
-        getPersons(){
-            return this.persons.filter((person) => {
-                return person.age > 20
-            })
-        }
+
     },
 
     components: {

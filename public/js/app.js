@@ -5347,42 +5347,21 @@ __webpack_require__.r(__webpack_exports__);
   name: "PostComponent",
   data: function data() {
     return {
-      persons: [{
-        id: 1,
-        name: 'Vasya',
-        age: 20,
-        job: 'Coach'
-      }, {
-        id: 2,
-        name: 'Anya',
-        age: 17,
-        job: 'Schoolgirl'
-      }, {
-        id: 3,
-        name: 'Petr',
-        age: 30,
-        job: 'Teacher'
-      }, {
-        id: 4,
-        name: 'Tanya',
-        age: 25,
-        job: 'Traveler'
-      }, {
-        id: 5,
-        name: 'Irina',
-        age: 27,
-        job: 'Designer'
-      }]
+      persons: null
     };
   },
-  methods: {},
-  computed: {
-    getPersons: function getPersons() {
-      return this.persons.filter(function (person) {
-        return person.age > 20;
+  mounted: function mounted() {
+    this.getPosts();
+  },
+  methods: {
+    getPosts: function getPosts() {
+      var _this = this;
+      axios.get('/posts').then(function (result) {
+        _this.persons = result.data;
       });
     }
   },
+  computed: {},
   components: {
     SinglePostComponent: _SinglePostComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -28296,7 +28275,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.getPersons, function (person) {
+            _vm._l(_vm.persons, function (person) {
               return _c("tr", [
                 _c("th", { attrs: { scope: "row" } }, [
                   _vm._v(_vm._s(person.id)),
@@ -28306,7 +28285,7 @@ var render = function () {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(person.age))]),
                 _vm._v(" "),
-                _c("td", [_vm._v("@" + _vm._s(person.job))]),
+                _c("td", [_vm._v(_vm._s(person.job))]),
               ])
             }),
             0
