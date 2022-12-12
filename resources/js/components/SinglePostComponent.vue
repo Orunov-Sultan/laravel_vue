@@ -1,6 +1,6 @@
 <template>
-<div class="alert alert-warning">
-    Single Post Component
+<div>
+
 </div>
 </template>
 
