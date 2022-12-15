@@ -11,13 +11,17 @@
             </tr>
             </thead>
             <tbody>
-            <template  v-for="person in people">
+            <template v-for="person in people">
                 <tr :class="isEdit(person.id) ? 'd-none' : ''">
                     <th scope="row">{{ person.id }}</th>
                     <td>{{ person.name }}</td>
                     <td>{{ person.age }}</td>
                     <td>{{ person.job }}</td>
-                    <td><a href="#" @click.prevent="checkPersonId(person.id, person.name, person.age, person.job)" class="btn btn-success">Edit</a></td>
+                    <td class="d-flex justify-content-center">
+                        <a href="#" @click.prevent="checkPersonId(person.id, person.name, person.age, person.job)"
+                           class="btn btn-success mx-3">Edit</a>
+                        <a href="#" @click.prevent="deletePerson(person.id)" class="btn btn-danger">Delete</a>
+                    </td>
                 </tr>
                 <tr :class="isEdit(person.id) ? '' : 'd-none'">
                     <th scope="row">{{ person.id }}</th>
@@ -53,29 +57,36 @@ export default {
     methods: {
         getPeople() {
             axios.get('/api/people')
-            .then(response => {
-                this.people = response.data
-            })
+                .then(response => {
+                    this.people = response.data
+                })
         },
 
-        checkPersonId(id, name, age, job){
+        checkPersonId(id, name, age, job) {
             this.personEditId = id
             this.name = name
             this.age = age
             this.job = job
         },
 
-        isEdit(id){
+        isEdit(id) {
             return this.personEditId === id
         },
 
-        updatePerson(id){
+        updatePerson(id) {
             this.personEditId = null
 
             axios.put(`/api/people/${id}`, {name: this.name, age: this.age, job: this.job})
-            .then(res => {
-                this.getPeople()
-            })
+                .then(res => {
+                    this.getPeople()
+                })
+        },
+
+        deletePerson(id) {
+            axios.delete(`/api/people/${id}`)
+                .then(res => {
+                    this.getPeople()
+                })
         }
     }
 }
