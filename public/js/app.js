@@ -5349,11 +5349,10 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name,
         age: this.age,
         job: this.job
-      }).then(function (response) {
+      }).then(function (res) {
         _this.name = null;
         _this.age = null;
         _this.job = null;
-        console.log(response.data);
       });
     }
   }
@@ -5395,12 +5394,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "IndexComponent",
   data: function data() {
     return {
-      people: null
+      people: null,
+      personEditId: null,
+      name: null,
+      age: null,
+      job: null
     };
   },
   mounted: function mounted() {
@@ -5411,6 +5425,26 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       axios.get('/api/people').then(function (response) {
         _this.people = response.data;
+      });
+    },
+    checkPersonId: function checkPersonId(id, name, age, job) {
+      this.personEditId = id;
+      this.name = name;
+      this.age = age;
+      this.job = job;
+    },
+    isEdit: function isEdit(id) {
+      return this.personEditId === id;
+    },
+    updatePerson: function updatePerson(id) {
+      var _this2 = this;
+      this.personEditId = null;
+      axios.put("/api/people/".concat(id), {
+        name: this.name,
+        age: this.age,
+        job: this.job
+      }).then(function (res) {
+        _this2.getPeople();
       });
     }
   }
@@ -28414,7 +28448,7 @@ var render = function () {
             },
           ],
           staticClass: "form-control",
-          attrs: { type: "text", id: "name", placeholder: "Name..." },
+          attrs: { type: "text", placeholder: "Name..." },
           domProps: { value: _vm.name },
           on: {
             input: function ($event) {
@@ -28438,7 +28472,7 @@ var render = function () {
             },
           ],
           staticClass: "form-control",
-          attrs: { type: "number", id: "age", placeholder: "Age..." },
+          attrs: { type: "number", placeholder: "Age..." },
           domProps: { value: _vm.age },
           on: {
             input: function ($event) {
@@ -28462,7 +28496,7 @@ var render = function () {
             },
           ],
           staticClass: "form-control",
-          attrs: { type: "text", id: "job", placeholder: "Job..." },
+          attrs: { type: "text", placeholder: "Job..." },
           domProps: { value: _vm.job },
           on: {
             input: function ($event) {
@@ -28482,7 +28516,7 @@ var render = function () {
           on: {
             click: function ($event) {
               $event.preventDefault()
-              return _vm.addPerson.apply(null, arguments)
+              return _vm.addPerson()
             },
           },
         }),
@@ -28519,18 +28553,138 @@ var render = function () {
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.people, function (person) {
-          return _c("tr", [
-            _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(person.id))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(person.name))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(person.age))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(person.job))]),
-          ])
-        }),
-        0
+        [
+          _vm._l(_vm.people, function (person) {
+            return [
+              _c("tr", { class: _vm.isEdit(person.id) ? "d-none" : "" }, [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _vm._v(_vm._s(person.id)),
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(person.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(person.age))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(person.job))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function ($event) {
+                          $event.preventDefault()
+                          return _vm.checkPersonId(
+                            person.id,
+                            person.name,
+                            person.age,
+                            person.job
+                          )
+                        },
+                      },
+                    },
+                    [_vm._v("Edit")]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("tr", { class: _vm.isEdit(person.id) ? "" : "d-none" }, [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _vm._v(_vm._s(person.id)),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.name,
+                        expression: "name",
+                      },
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.name },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.name = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.age,
+                        expression: "age",
+                      },
+                    ],
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.age },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.age = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.job,
+                        expression: "job",
+                      },
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.job },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.job = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function ($event) {
+                          $event.preventDefault()
+                          return _vm.updatePerson(person.id)
+                        },
+                      },
+                    },
+                    [_vm._v("Update")]
+                  ),
+                ]),
+              ]),
+            ]
+          }),
+        ],
+        2
       ),
     ]),
   ])
@@ -28549,6 +28703,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Age")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Job")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")]),
       ]),
     ])
   },
