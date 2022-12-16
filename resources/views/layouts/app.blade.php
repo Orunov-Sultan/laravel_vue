@@ -20,8 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <post-component></post-component>
+    <div id="app" class="p-5">
 
     </div>
 </body>
