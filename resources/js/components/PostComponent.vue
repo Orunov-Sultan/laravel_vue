@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div class="alert alert-info my-3">
-            <CreateComponent></CreateComponent>
-            <IndexComponent></IndexComponent>
+            <CreateComponent :obj="obj"></CreateComponent>
+            <IndexComponent ref="index"></IndexComponent>
         </div>
     </div>
 </template>
@@ -16,7 +16,11 @@ export default {
 
     data() {
         return {
-
+            obj: {
+                color: 'Black',
+                number: 30,
+                isPublished: false
+            }
         }
     },
 

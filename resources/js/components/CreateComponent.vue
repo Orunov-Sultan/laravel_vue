@@ -14,7 +14,9 @@
                 <input @click.prevent="addPerson()" type="button" class="btn btn-primary" value="Добавить">
             </div>
         </div>
+
     </div>
+
 </template>
 
 <script>
@@ -36,6 +38,7 @@ export default {
                 this.name = null
                 this.age = null
                 this.job = null
+                this.$parent.$refs.index.getPeople()
             })
         }
     }

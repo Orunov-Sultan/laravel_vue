@@ -12,24 +12,8 @@
             </thead>
             <tbody>
             <template v-for="person in people">
-                <tr :class="isEdit(person.id) ? 'd-none' : ''">
-                    <th scope="row">{{ person.id }}</th>
-                    <td>{{ person.name }}</td>
-                    <td>{{ person.age }}</td>
-                    <td>{{ person.job }}</td>
-                    <td class="d-flex justify-content-center">
-                        <a href="#" @click.prevent="checkPersonId(person.id, person.name, person.age, person.job)"
-                           class="btn btn-success mx-3">Edit</a>
-                        <a href="#" @click.prevent="deletePerson(person.id)" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                <tr :class="isEdit(person.id) ? '' : 'd-none'">
-                    <th scope="row">{{ person.id }}</th>
-                    <td><input v-model="name" type="text"></td>
-                    <td><input v-model="age" type="number"></td>
-                    <td><input v-model="job" type="text"></td>
-                    <td><a href="#" @click.prevent="updatePerson(person.id)" class="btn btn-primary">Update</a></td>
-                </tr>
+                <ShowComponent :person="person"></ShowComponent>
+                <EditComponent :person="person" :ref="`edit_${person.id}`"></EditComponent>
             </template>
             </tbody>
         </table>
@@ -37,8 +21,14 @@
 </template>
 
 <script>
+import EditComponent from "./EditComponent";
+import ShowComponent from "./ShowComponent";
 export default {
     name: "IndexComponent",
+    components: {
+        EditComponent,
+        ShowComponent
+    },
 
     data() {
         return {
@@ -64,9 +54,11 @@ export default {
 
         checkPersonId(id, name, age, job) {
             this.personEditId = id
-            this.name = name
-            this.age = age
-            this.job = job
+            let editName = `edit_${id}`;
+            let fullEditName = this.$refs[editName][0]
+            fullEditName.name = name
+            fullEditName.age = age
+            fullEditName.job = job
         },
 
         isEdit(id) {
