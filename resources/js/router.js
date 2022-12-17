@@ -8,6 +8,7 @@ export default new VueRouter({
     mode: 'history',
     routes: [
         {path: '/people', component: () => import('./components/person/Index'), name: 'person.index'},
+        {path: '/people/create', component: () => import('./components/person/Create'), name: 'person.create'},
     ]
 })
 
