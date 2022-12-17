@@ -9,6 +9,8 @@ export default new VueRouter({
     routes: [
         {path: '/people', component: () => import('./components/person/Index'), name: 'person.index'},
         {path: '/people/create', component: () => import('./components/person/Create'), name: 'person.create'},
+        {path: '/people/:id/edit', component: () => import('./components/person/Edit'), name: 'person.edit'},
+        {path: '/people/:id', component: () => import('./components/person/Show'), name: 'person.show'},
     ]
 })
 

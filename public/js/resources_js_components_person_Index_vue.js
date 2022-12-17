@@ -36,8 +36,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
@@ -145,8 +143,8 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("table", { staticClass: "table" }, [
+  return _c("div", { staticClass: "d-flex justify-content-center" }, [
+    _c("table", { staticClass: "table w-50" }, [
       _vm._m(0),
       _vm._v(" "),
       _c(
@@ -155,17 +153,30 @@ var render = function () {
           _vm._l(_vm.people, function (person) {
             return [
               _c("tr", [
-                _c("th", { attrs: { scope: "row" } }, [
-                  _vm._v(_vm._s(person.id)),
-                ]),
-                _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(person.name))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(person.age))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(person.job))]),
                 _vm._v(" "),
-                _vm._m(1, true),
+                _c(
+                  "td",
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to: {
+                            name: "person.edit",
+                            params: { id: person.id },
+                          },
+                        },
+                      },
+                      [_vm._v("Edit")]
+                    ),
+                  ],
+                  1
+                ),
               ]),
             ]
           }),
@@ -182,8 +193,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Age")]),
@@ -191,16 +200,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Job")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "btn btn-success", attrs: { href: "#" } }, [
-        _vm._v("Edit"),
       ]),
     ])
   },
