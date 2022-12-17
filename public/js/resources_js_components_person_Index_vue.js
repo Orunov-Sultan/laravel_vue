@@ -36,6 +36,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
@@ -52,6 +57,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       axios.get('/api/people').then(function (res) {
         _this.people = res.data;
+      });
+    },
+    deletePerson: function deletePerson(id) {
+      var _this2 = this;
+      axios["delete"]("/api/people/".concat(id)).then(function (res) {
+        _this2.getPeople();
       });
     }
   }
@@ -153,7 +164,24 @@ var render = function () {
           _vm._l(_vm.people, function (person) {
             return [
               _c("tr", [
-                _c("td", [_vm._v(_vm._s(person.name))]),
+                _c(
+                  "td",
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to: {
+                            name: "person.show",
+                            params: { id: person.id },
+                          },
+                        },
+                      },
+                      [_vm._v(_vm._s(person.name))]
+                    ),
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(person.age))]),
                 _vm._v(" "),
@@ -173,6 +201,21 @@ var render = function () {
                         },
                       },
                       [_vm._v("Edit")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "text-danger px-3",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function ($event) {
+                            $event.preventDefault()
+                            return _vm.deletePerson(person.id)
+                          },
+                        },
+                      },
+                      [_vm._v("Delete")]
                     ),
                   ],
                   1
